@@ -168,20 +168,21 @@ struct Ring: View {
 struct Ring_Previews: PreviewProvider {
 	static var previews: some View {
 		VStack {
-			Ring(
-				ringWidth: 50, percent: 5 ,
-				foregroundColor: ColorGradient(.green, .blue), touchLocation: -1.0
-			)
-			.frame(width: 200, height: 200)
-
-			Ring(
-				ringWidth: 20, percent: 110 ,
-				foregroundColor: ColorGradient(.red, .blue), touchLocation: -1.0
-			)
-			.frame(width: 200, height: 200)
-
-
-
+//			Ring(
+//				ringWidth: 50, percent: 5 ,
+//				foregroundColor: ColorGradient(.green, .blue), touchLocation: -1.0
+//			)
+//			.frame(width: 200, height: 200)
+//
+//			Ring(
+//				ringWidth: 20, percent: 110 ,
+//				foregroundColor: ColorGradient(.red, .blue), touchLocation: -1.0
+//			)
+//			.frame(width: 200, height: 200)
+      
+      Ring(ringWidth:5, percent: 60, foregroundColor: ColorGradient(.orange, .orange), touchLocation: -1.0)
+        .frame(width: 40, height: 40)
+      Text("66")
 		}
 	}
 }

@@ -8,7 +8,7 @@ extension CGPoint {
 	///   - data: array of `Double`
 	/// - Returns: X and Y delta as a `CGPoint`
     static func getStep(frame: CGRect, data: [Double]) -> CGPoint {
-        let padding: CGFloat = 30.0
+        let padding: CGFloat = 0
 
         // stepWidth
         var stepWidth: CGFloat = 0.0
@@ -37,5 +37,11 @@ extension CGPoint {
         }
 
         return CGPoint(x: stepWidth, y: stepHeight)
+    }
+    
+    func denormalize(with geometry: GeometryProxy) -> CGPoint {
+        let width = geometry.frame(in: .local).width
+        let height = geometry.frame(in: .local).height
+        return CGPoint(x: self.x * width, y: self.y * height)
     }
 }

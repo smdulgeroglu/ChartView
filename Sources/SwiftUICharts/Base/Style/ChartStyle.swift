@@ -3,10 +3,10 @@ import SwiftUI
 /// Descripton of colors/styles for any kind of chart
 public class ChartStyle: ObservableObject {
 
-	/// colors for background are of chart
+	/// colors for background area of chart
 	public let backgroundColor: ColorGradient
 	/// colors for foreground fill of chart
-    public let foregroundColor: [ColorGradient]
+  public let foregroundColor: [ColorGradient]
 
 	/// Initialize with a single background color and an array of `ColorGradient` for the foreground
 	/// - Parameters:
