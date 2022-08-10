@@ -31,7 +31,7 @@ public class ChartData: ObservableObject {
     let maxOverlay = pointsTarget.map { abs($0) }.max() ?? 0.0
     let maxOfMax = max(1.0, maxData, maxOverlay)
     let normalised = pointsTarget.map { $0 / maxOfMax }
-//    print("---- > normalisedPointsOverlay pointsOverlay:\(pointsOverlay) maxData:\(maxData) maxOverlay:\(maxOverlay) maxOfMax:\(maxOfMax) normalisedPt:\(normalised)")
+    // print("---- > normalisedPointsTarget pointsTarget:\(pointsTarget) maxData:\(maxData) maxOverlay:\(maxOverlay) maxOfMax:\(maxOfMax) normalisedPt:\(normalised)")
     
     return normalised
  }

@@ -107,10 +107,11 @@ public struct ChartLabel: View {
   private func formattedValue(_ format: String, _ value: Double) -> String {
     if format.hasPrefix("hhmmss") {
       return secondsTohhmm(Int(value)) + " "
+    } else if format.hasPrefix("dist") {
+      return String(Int(value / 1000.0)) + " km"
     } else {
       return String(format: format, value)
     }
-    
   }
   
   /// The content and behavior of the `ChartLabel`.
@@ -118,7 +119,15 @@ public struct ChartLabel: View {
   /// Displays current value if chart is currently being touched along a data point, otherwise the specified text.
   public var body: some View {
     HStack {
-      Text(textToDisplay)
+      if !self.chartValue.interactionInProgress {
+        Text(title)
+          .font(.system(size: labelSize))
+          .bold()
+          .foregroundColor(self.labelColor)
+          .padding(self.labelPadding)
+        Spacer()
+      } else {
+        Text(textToDisplay)
         .font(.system(size: labelSize))
         .bold()
         .foregroundColor(self.labelColor)
@@ -130,16 +139,14 @@ public struct ChartLabel: View {
           let currentValue = self.chartValue.currentValue
           let currentTarget = self.chartValue.currentValueTarget
           
-          let pctOfTarget = currentTarget > 0 ? String(format: "%.0f%%", currentValue / currentTarget * 100 ): ""
-          let targetValue = currentValue == 0 && currentTarget > 0 ? "(" + formattedValue(format, currentTarget) + ")" : " "
-          let currentValueFmt = currentValue > 0 ? formattedValue(format, currentValue) : ""
+          let pctOfTarget = currentTarget > 0 ? "(" + String(format: "%.0f%%", currentValue / currentTarget * 100 ) + ")" : ""
+          let targetValue = currentValue == 0 && currentTarget > 0 ? " (" + formattedValue(format, currentTarget) + ")" : " "
+          let currentValueFmt = currentValue > 0 ? formattedValue(format, currentValue) + " " : ""
           
           self.textToDisplay = self.chartValue.interactionInProgress ? currentValueFmt + pctOfTarget + targetValue : self.title
-          //          print("chartLabel currentValue:\(currentValue) currentValueBackground:\(currentValueBackground) currentValueFmt:\(currentValueFmt) compliance:\(compliance) plannedValue:\(plannedValue) FINAL:\(currentValueFmt + compliance + plannedValue)")
+          
+          //  print("chartLabel currentValue:\(currentValue) currentTarget:\(currentTarget) currentValueFmt:\(currentValueFmt) pctOfTarget:\(pctOfTarget) targetValue:\(targetValue) FINAL:\(currentValueFmt + pctOfTarget + targetValue)")
         }
-      Spacer()
-      if !self.chartValue.interactionInProgress {
-        Spacer()
       }
     }
   }

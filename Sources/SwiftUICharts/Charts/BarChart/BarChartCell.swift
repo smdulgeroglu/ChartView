@@ -40,7 +40,7 @@ public struct BarChartCell: View {
 
     ZStack {
       VStack (spacing:0){
-        let valueTarget = data.normalisedPointsTarget[index]
+        let valueTarget = data.pointsTarget.count > 0 ? data.normalisedPointsTarget[index] : 0
         
         BarChartCellShape(value: didCellAppear ? valueTarget : 0.0, cornerRadius: 2)
           .fill( gradientColor.linearGradient(from: .bottom, to: .top))
