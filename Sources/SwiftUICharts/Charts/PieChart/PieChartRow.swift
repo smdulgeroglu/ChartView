@@ -18,6 +18,8 @@ public struct PieChartRow: View {
             let endDeg = lastEndDeg + (normalized * 360)
             lastEndDeg = endDeg
             tempSlices.append(PieSlice(startDeg: startDeg, endDeg: endDeg, value: slice))
+          
+//          let _ = print("Data:\(chartData.points) slice:\(slice) normalised:\(normalized) maxValue:\(maxValue) tempSlices:\(tempSlices)")
         }
         
         return tempSlices

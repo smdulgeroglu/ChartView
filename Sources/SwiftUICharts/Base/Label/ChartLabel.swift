@@ -118,6 +118,9 @@ public struct ChartLabel: View {
   ///
   /// Displays current value if chart is currently being touched along a data point, otherwise the specified text.
   public var body: some View {
+//    let _ = print("chartValue:\(chartValue)")
+//    let _ = print("")
+//
     HStack {
       if !self.chartValue.interactionInProgress {
         Text(title)
