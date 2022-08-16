@@ -1,6 +1,7 @@
 import SwiftUI
 
 /// An observable wrapper for an array of data for use in any chart
+@available(iOS 13.0, *)
 public class ChartData: ObservableObject {
   @Published public var data: [(String, Double, Double)] = []
   

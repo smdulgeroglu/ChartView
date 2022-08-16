@@ -1,6 +1,7 @@
 import SwiftUI
 
 /// An encapsulation of a simple gradient between one color and another
+@available(iOS 14, *)
 public struct ColorGradient: Equatable {
   public let startColor: Color
   public let endColor: Color
@@ -28,6 +29,7 @@ public struct ColorGradient: Equatable {
   }
 }
 
+@available(iOS 14, *)
 extension ColorGradient {
   /// Convenience method to return a SwiftUI LinearGradient view from the ColorGradient
   /// - Parameters:
@@ -39,6 +41,7 @@ extension ColorGradient {
   }
 }
 
+@available(iOS 14, *)
 extension ColorGradient {
   public static let orangeBright = ColorGradient(ChartColors.orangeBright)
   public static let redBlack = ColorGradient(.red, .black)

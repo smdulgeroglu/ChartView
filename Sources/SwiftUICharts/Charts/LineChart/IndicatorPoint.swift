@@ -1,6 +1,7 @@
 import SwiftUI
 
 /// A dot representing a single data point as user moves finger over line in `LineChart`
+@available(iOS 14, *)
 struct IndicatorPoint: View {
 	/// The content and behavior of the `IndicatorPoint`.
 	///
@@ -17,6 +18,7 @@ struct IndicatorPoint: View {
     }
 }
 
+@available(iOS 14, *)
 struct IndicatorPoint_Previews: PreviewProvider {
     static var previews: some View {
         IndicatorPoint()

@@ -1,6 +1,7 @@
 import SwiftUI
 
 /// A single row of data, a view in a `BarChart`
+@available(iOS 14, *)
 public struct BarChartRow: View {
   @EnvironmentObject var chartValue: ChartValue
   @ObservedObject var chartData: ChartData
@@ -80,6 +81,7 @@ public struct BarChartRow: View {
   }
 }
 
+@available(iOS 14, *)
 struct BarChartRow_Previews: PreviewProvider {
   static let chartData = ChartData([6, 2, 5, 6, 7, 8, 9])
   static let chartData2 = ChartData([("M",6), ("T",2), ("W",5), ("T",6), ("F",7), ("S",8), ("S",9)])

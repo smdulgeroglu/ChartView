@@ -1,6 +1,7 @@
 import SwiftUI
 
 /// A type of chart that displays vertical bars for each data point
+@available(iOS 14, *)
 public struct BarChart: View, ChartBase {
     public var chartData = ChartData()
 

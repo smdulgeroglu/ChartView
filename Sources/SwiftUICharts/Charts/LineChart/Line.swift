@@ -1,6 +1,7 @@
 import SwiftUI
 
 /// A single line of data, a view in a `LineChart`
+@available(iOS 14, *)
 public struct Line: View {
     @EnvironmentObject var chartValue: ChartValue
     @ObservedObject var chartData: ChartData
@@ -69,6 +70,7 @@ public struct Line: View {
 
 // MARK: - Private functions
 
+@available(iOS 14, *)
 extension Line {
 	/// Calculate point closest to where the user touched
 	/// - Parameter touchLocation: location in view where touched
@@ -94,6 +96,7 @@ extension Line {
     }
 }
 
+@available(iOS 14, *)
 struct Line_Previews: PreviewProvider {
     /// Predefined style, black over white, for preview
     static let blackLineStyle = ChartStyle(backgroundColor: ColorGradient(.white), foregroundColor: ColorGradient(.black))

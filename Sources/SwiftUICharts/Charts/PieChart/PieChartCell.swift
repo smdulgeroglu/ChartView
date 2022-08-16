@@ -9,6 +9,7 @@ struct PieSlice: Identifiable {
 }
 
 /// A single row of data, a view in a `PieChart`
+@available(iOS 14, *)
 public struct PieChartCell: View {
     @State private var show: Bool = false
     var rect: CGRect
@@ -57,6 +58,7 @@ public struct PieChartCell: View {
     }
 }
 
+@available(iOS 14, *)
 struct PieChartCell_Previews: PreviewProvider {
     static var previews: some View {
         Group {

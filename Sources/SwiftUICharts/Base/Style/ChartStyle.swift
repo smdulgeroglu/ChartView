@@ -1,6 +1,7 @@
 import SwiftUI
 
 /// Descripton of colors/styles for any kind of chart
+@available(iOS 14, *)
 public class ChartStyle: ObservableObject {
 
 	/// colors for background area of chart

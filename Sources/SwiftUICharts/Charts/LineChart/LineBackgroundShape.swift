@@ -1,5 +1,6 @@
 import SwiftUI
 
+@available(iOS 14, *)
 struct LineBackgroundShape: Shape {
     var data: [Double]
     func path(in rect: CGRect) -> Path {
@@ -8,6 +9,7 @@ struct LineBackgroundShape: Shape {
     }
 }
 
+@available(iOS 14, *)
 struct LineBackgroundShape_Previews: PreviewProvider {
     static var previews: some View {
         Group {

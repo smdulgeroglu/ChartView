@@ -1,6 +1,7 @@
 import SwiftUI
 
 /// What kind of label - this affects color, size, position of the label
+@available(iOS 14, *)
 public enum ChartLabelType {
   case title
   case subTitle
@@ -10,6 +11,7 @@ public enum ChartLabelType {
 }
 
 /// A chart may contain any number of labels in pre-set positions based on their `ChartLabelType`
+@available(iOS 14, *)
 public struct ChartLabel: View {
   @EnvironmentObject var chartValue: ChartValue
   @State var textToDisplay:String = ""

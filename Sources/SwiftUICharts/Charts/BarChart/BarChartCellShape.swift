@@ -1,5 +1,6 @@
 import SwiftUI
 
+@available(iOS 14, *)
 struct BarChartCellShape: Shape, Animatable {
 
   var value: Double
@@ -40,6 +41,7 @@ struct BarChartCellShape: Shape, Animatable {
   }
 }
 
+@available(iOS 14, *)
 struct BarChartCellShape_Previews: PreviewProvider {
   static var previews: some View {
     Group {

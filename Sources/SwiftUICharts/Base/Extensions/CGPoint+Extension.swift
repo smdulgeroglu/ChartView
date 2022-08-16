@@ -1,5 +1,6 @@
 import SwiftUI
 
+@available(iOS 14, *)
 extension CGPoint {
 	
 	/// Calculate X and Y delta for each data point, based on data min/max and enclosing frame.

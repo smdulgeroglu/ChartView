@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(iOS 14, *)
 public struct RingsChart: View, ChartBase {
 	public var chartData = ChartData()
 

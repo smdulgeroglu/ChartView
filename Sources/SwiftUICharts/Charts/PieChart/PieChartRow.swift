@@ -1,6 +1,7 @@
 import SwiftUI
 
 /// A single "row" (slice) of data, a view in a `PieChart`
+@available(iOS 14, *)
 public struct PieChartRow: View {
     @ObservedObject var chartData: ChartData
     @EnvironmentObject var chartValue: ChartValue

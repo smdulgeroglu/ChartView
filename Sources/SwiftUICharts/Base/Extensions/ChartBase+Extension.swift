@@ -1,5 +1,6 @@
 import SwiftUI
 
+@available(iOS 14, *)
 extension View where Self: ChartBase {
 	
 	/// Set data for a chart

@@ -6,6 +6,7 @@ import SwiftUI
 /// to show the percentage completion to the target
 /// eg: Actual Completed = 1hr against a 2hr plan duration
 ///
+@available(iOS 14, *)
 public struct BarChartCell: View {
   @Environment(\.colorScheme) var colorScheme: ColorScheme
   @EnvironmentObject var data: ChartData
@@ -68,6 +69,7 @@ public struct BarChartCell: View {
   }
 }
 
+@available(iOS 14, *)
 struct BarChartCell_Previews: PreviewProvider {
   static var previews: some View {
     Group {

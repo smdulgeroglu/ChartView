@@ -1,7 +1,7 @@
 import SwiftUI
 
+@available(iOS 14, *)
 extension Path {
-
 	/// Returns a tiny segment of path based on percentage along the path
 	///
 	/// TODO: Explain why more than 1 gets 0 and why less than 0 gets 1
@@ -208,7 +208,7 @@ extension Path {
 	///   - points: <#points description#>
 	///   - step: <#step description#>
 	/// - Returns: <#description#>
-    static func closedLinePathWithPoints(points: [Double], step: CGPoint) -> Path {
+  static func closedLinePathWithPoints(points: [Double], step: CGPoint) -> Path {
         var path = Path()
         if points.count < 2 {
             return path

@@ -1,5 +1,6 @@
 import SwiftUI
 
+@available(iOS 14, *)
 public struct ChartGrid<Content: View>: View, ChartBase {
     public var chartData = ChartData()
     let content: () -> Content
@@ -27,6 +28,7 @@ public struct ChartGrid<Content: View>: View, ChartBase {
     }
 }
 
+@available(iOS 14, *)
 struct GridElement: View {
     var body: some View {
         DashedLine()
@@ -34,6 +36,7 @@ struct GridElement: View {
     }
 }
 
+@available(iOS 14, *)
 struct DashedLine: View {
     func line(frame: CGRect) -> Path {
         let baseLine: CGFloat = CGFloat(frame.height / 2)

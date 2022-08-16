@@ -1,5 +1,6 @@
 import SwiftUI
 
+@available(iOS 14, *)
 struct LineShapeView: View, Animatable {
     var chartData: ChartData
     var geometry: GeometryProxy

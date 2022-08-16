@@ -1,5 +1,6 @@
 import SwiftUI
 
+@available(iOS 14, *)
 extension View {
 
 	/// Attach chart style to a View

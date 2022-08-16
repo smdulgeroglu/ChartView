@@ -18,6 +18,7 @@ extension Double {
 	}
 }
 
+@available(iOS 14, *)
 struct RingShape: Shape {
 	/// Helper function to convert percent values to angles in degrees
 	/// - Parameters:
@@ -63,6 +64,7 @@ struct RingShape: Shape {
 	}
 }
 
+@available(iOS 14, *)
 struct Ring: View {
 
 	private static let ShadowColor: Color = Color.black.opacity(0.2)
@@ -165,6 +167,7 @@ struct Ring: View {
 	}
 }
 
+@available(iOS 14, *)
 struct Ring_Previews: PreviewProvider {
 	static var previews: some View {
 		VStack {

@@ -1,5 +1,6 @@
 import SwiftUI
 
+@available(iOS 14, *)
 extension Color {
 	/// Create a `Color` from a hexadecimal representation
 	/// - Parameter hexString: 3, 6, or 8-character string, with optional (ignored) punctuation such as "#"

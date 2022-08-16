@@ -1,6 +1,7 @@
 import SwiftUI
 
 /// View containing data and some kind of chart content
+@available(iOS 14.0, *)
 public struct CardView<Content: View>: View, ChartBase {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     

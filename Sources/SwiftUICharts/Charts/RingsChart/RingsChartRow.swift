@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(iOS 14, *)
 public struct RingsChartRow: View {
 
 	var width : CGFloat
@@ -112,7 +113,7 @@ public struct RingsChartRow: View {
 	}
 }
 
-
+@available(iOS 14, *)
 struct RingsChartRow_Previews: PreviewProvider {
 	static var previews: some View {
 

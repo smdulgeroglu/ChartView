@@ -1,5 +1,6 @@
 import Foundation
 
+@available(iOS 14, *)
 extension Array where Element == ColorGradient {
 	
 	/// <#Description#>
