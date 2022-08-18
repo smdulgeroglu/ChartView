@@ -39,7 +39,8 @@ public struct PieChartRow: View {
     public var body: some View {
         GeometryReader { geometry in
             ZStack {
-                ForEach(0..<self.slices.count) { index in
+              ForEach(0..<self.slices.count, id:\.self) { index in
+                  // let _ = print("piechartRow slices.id:\(slices)")
                     PieChartCell(
                         rect: geometry.frame(in: .local),
                         startDeg: self.slices[index].startDeg,
