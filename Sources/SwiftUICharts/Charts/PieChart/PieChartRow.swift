@@ -40,7 +40,6 @@ public struct PieChartRow: View {
         GeometryReader { geometry in
             ZStack {
               ForEach(0..<self.slices.count, id:\.self) { index in
-                  // let _ = print("piechartRow slices.id:\(slices)")
                     PieChartCell(
                         rect: geometry.frame(in: .local),
                         startDeg: self.slices[index].startDeg,
@@ -53,21 +52,21 @@ public struct PieChartRow: View {
                     .animation(Animation.spring())
                 }
             }
-            .gesture(DragGesture()
-                        .onChanged({ value in
-                            let rect = geometry.frame(in: .local)
-                            let isTouchInPie = isPointInCircle(point: value.location, circleRect: rect)
-                            if isTouchInPie {
-                                let touchDegree = degree(for: value.location, inCircleRect: rect)
-                                currentTouchedIndex = slices.firstIndex(where: { $0.startDeg < touchDegree && $0.endDeg > touchDegree }) ?? -1
-                            } else {
-                                currentTouchedIndex = -1
-                            }
-                        })
-                        .onEnded({ value in
-                            currentTouchedIndex = -1
-                        })
-            )
+//            .gesture(DragGesture()
+//              .onChanged({ value in
+//                let rect = geometry.frame(in: .local)
+//                let isTouchInPie = isPointInCircle(point: value.location, circleRect: rect)
+//                if isTouchInPie {
+//                  let touchDegree = degree(for: value.location, inCircleRect: rect)
+//                  currentTouchedIndex = slices.firstIndex(where: { $0.startDeg < touchDegree && $0.endDeg > touchDegree }) ?? -1
+//                } else {
+//                  currentTouchedIndex = -1
+//                }
+//              })
+//                .onEnded({ value in
+//                  currentTouchedIndex = -1
+//                })
+//            )
         }
     }
 }
