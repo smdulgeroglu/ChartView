@@ -103,7 +103,7 @@ struct Ring: View {
 		)
 	}
 
-	init(ringWidth: CGFloat, percent: Double, foregroundColor: ColorGradient, touchLocation:CGFloat) {
+	public init(ringWidth: CGFloat, percent: Double, foregroundColor: ColorGradient, touchLocation:CGFloat) {
 		self.ringWidth = ringWidth
 		self.percent = percent
 		self.foregroundColor = foregroundColor
