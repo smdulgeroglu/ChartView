@@ -109,8 +109,18 @@ public struct ChartLabel: View {
   private func formattedValue(_ format: String, _ value: Double) -> String {
     if format.hasPrefix("hhmmss") {
       return secondsTohhmm(Int(value)) + " "
-    } else if format.hasPrefix("dist") {
-      return String(Int(value / 1000.0)) + " km"
+    } else if format.hasPrefix("metricDist") {
+      return String(Int(value / 1000.0)) + "km"
+    } else if format.hasPrefix("imperialDist") {
+      return String(Int(value / 1609.0)) + "mi"
+    } else if format.hasPrefix("metricElev") {
+      return String(Int(value)) + "m"
+    } else if format.hasPrefix("imperialElev") {
+      return String(Int(value / 3.28084)) + "ft"
+    } else if format.hasPrefix("calories") {
+      return String(Int(value)) + "kCal"
+    } else if format.hasPrefix("joules") {
+      return String(Int(value / 1000.0)) + "kJ"
     } else {
       return String(format: format, value)
     }
@@ -130,11 +140,14 @@ public struct ChartLabel: View {
           .bold()
           .foregroundColor(self.labelColor)
           .padding(self.labelPadding)
+          .minimumScaleFactor(0.7)
         Spacer()
       } else {
         Text(textToDisplay)
         .font(.system(size: labelSize))
         .bold()
+        .minimumScaleFactor(0.7)
+        .lineLimit(1)
         .foregroundColor(self.labelColor)
         .padding(self.labelPadding)
         .onAppear {
