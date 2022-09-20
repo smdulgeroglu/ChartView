@@ -157,7 +157,8 @@ public struct ChartLabel: View {
           let currentValue = self.chartValue.currentValue
           let currentTarget = self.chartValue.currentValueTarget
           
-          let pctOfTarget = currentTarget > 0 ? "(" + String(format: "%.0f%%", currentValue / currentTarget * 100 ) + ")" : ""
+          // let pctOfTarget = currentTarget > 0 ? "(" + String(format: "%.0f%%", currentValue / currentTarget * 100 ) + ")" : ""
+          let pctOfTarget = currentTarget > 0 ? "(" + String(Int((currentValue / currentTarget) * 100)) + "%)" : ""
           let targetValue = currentValue == 0 && currentTarget > 0 ? " (" + formattedValue(format, currentTarget) + ")" : " "
           let currentValueFmt = currentValue > 0 ? formattedValue(format, currentValue) + " " : ""
           
