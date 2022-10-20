@@ -206,7 +206,6 @@ public struct ChartLabel: View {
           self.textToDisplay = self.title
         }
         .onReceive(self.chartValue.objectWillChange) { _ in
-          let currentString = self.chartValue.currentString
           let currentValue = self.chartValue.currentValue
           let currentTarget = self.chartValue.currentValueTarget
           

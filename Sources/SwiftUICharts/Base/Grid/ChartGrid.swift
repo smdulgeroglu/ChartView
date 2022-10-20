@@ -17,7 +17,8 @@ public struct ChartGrid<Content: View>: View, ChartBase {
         HStack {
             ZStack {
                 VStack {
-                    ForEach(0..<numberOfHorizontalLines) { _ in 
+                  // https://www.hackingwithswift.com/forums/swiftui/compiler-warning-non-constant-range-argument-must-be-an-integer-literal/14878
+                    ForEach(0..<numberOfHorizontalLines, id: \.self) { _ in
                         GridElement()
                         Spacer()
                     }
