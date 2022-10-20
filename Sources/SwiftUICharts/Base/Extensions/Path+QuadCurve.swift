@@ -131,26 +131,31 @@ extension Path {
 	/// - Parameters:
 	///   - points: <#points description#>
 	///   - step: <#step description#>
-	///   - globalOffset: <#globalOffset description#>
+	///   - globalOffset: This should be the GlobalMin / GlobalMax to ensure they have the same y axis
 	/// - Returns: <#description#>
-    static func quadCurvedPathWithPoints(points: [Double], step: CGPoint, globalOffset: Double? = nil) -> Path {
-        var path = Path()
-        if points.count < 2 {
-            return path
-        }
-        let offset = globalOffset ?? points.min()!
-//        guard let offset = points.min() else { return path }
-        var point1 = CGPoint(x: 0, y: CGFloat(points[0]-offset)*step.y)
-        path.move(to: point1)
-        for pointIndex in 1..<points.count {
-            let point2 = CGPoint(x: step.x * CGFloat(pointIndex), y: step.y*CGFloat(points[pointIndex]-offset))
-            let midPoint = CGPoint.midPointForPoints(firstPoint: point1, secondPoint: point2)
-            path.addQuadCurve(to: midPoint, control: CGPoint.controlPointForPoints(firstPoint: midPoint, secondPoint: point1))
-            path.addQuadCurve(to: point2, control: CGPoint.controlPointForPoints(firstPoint: midPoint, secondPoint: point2))
-            point1 = point2
-        }
-        return path
+  static func quadCurvedPathWithPoints(points: [Double], step: CGPoint, globalOffset: Double? = nil) -> Path {
+    var path = Path()
+    if points.count < 2 {
+      return path
     }
+    let offset = globalOffset ?? points.min()!
+    
+    //        guard let offset = points.min() else { return path }
+    var point1 = CGPoint(x: 0, y: CGFloat(points[0]-offset)*step.y)
+    // let _ = print("\nquadCurvedPathWithPoints pts:\(points) offset:\(offset)\nprocessing pt:\(0) Value:\(points[0]) pt1:\(point1)")
+    
+    path.move(to: point1)
+    for pointIndex in 1..<points.count {
+      let point2 = CGPoint(x: step.x * CGFloat(pointIndex), y: step.y*CGFloat(points[pointIndex]-offset))
+      // let _ = print("processing pt:\(pointIndex) Value:\(points[pointIndex]) pt2:\(point2)")
+      
+      let midPoint = CGPoint.midPointForPoints(firstPoint: point1, secondPoint: point2)
+      path.addQuadCurve(to: midPoint, control: CGPoint.controlPointForPoints(firstPoint: midPoint, secondPoint: point1))
+      path.addQuadCurve(to: point2, control: CGPoint.controlPointForPoints(firstPoint: midPoint, secondPoint: point2))
+      point1 = point2
+    }
+    return path
+  }
 
 	/// <#Description#>
 	/// - Parameters:
@@ -186,20 +191,27 @@ extension Path {
 	///   - points: <#points description#>
 	///   - step: <#step description#>
 	/// - Returns: <#description#>
-    static func linePathWithPoints(points: [Double], step: CGPoint) -> Path {
+  static func linePathWithPoints(points: [Double], step: CGPoint, globalOffset: Double? = nil) -> Path {
         var path = Path()
         if points.count < 2 {
             return path
         }
-        guard let offset = points.min() else {
-            return path
-        }
-        let point1 = CGPoint(x: 0, y: CGFloat(points[0]-offset)*step.y)
+
+    guard let offset = globalOffset ?? points.min() else {
+          return path
+      }
+    
+      let point1 = CGPoint(x: 0, y: CGFloat(points[0]-offset)*step.y)
+//      let _ = print("\nlinePathWithPoints pts:\(points) offset:\(offset)\n0 processing pt:\(0) Value:\(points[0]) pt1:\(point1) path:\(path)")
+
         path.move(to: point1)
         for pointIndex in 1..<points.count {
             let point2 = CGPoint(x: step.x * CGFloat(pointIndex), y: step.y*CGFloat(points[pointIndex]-offset))
+//          let _ = print("1 processing pt:\(pointIndex) Value:\(points[pointIndex]) pt2:\(point2) path:\(path)")
+
             path.addLine(to: point2)
-        }
+          }
+let _ = print("linePath:\(path)")
         return path
     }
 

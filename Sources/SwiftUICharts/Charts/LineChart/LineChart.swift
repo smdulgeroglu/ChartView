@@ -12,7 +12,7 @@ public struct LineChart: View, ChartBase {
 	///
 	///
     public var body: some View {
-        Line(chartData: data, style: style)
+      Line(chartData: data, style: style)
     }
     
     public init() {}

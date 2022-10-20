@@ -8,17 +8,23 @@ public struct Line: View {
 
     var style: ChartStyle
 
-    @State private var showIndicator: Bool = false
+//    @State private var showIndicator: Bool = false
+    @State var showIndicator: Bool = false
     @State private var touchLocation: CGPoint = .zero
     @State private var showBackground: Bool = true
     @State private var didCellAppear: Bool = false
 
     var curvedLines: Bool = true
     var path: Path {
-        Path.quadCurvedPathWithPoints(points: chartData.normalisedPoints,
-                                      step: CGPoint(x: 1.0, y: 1.0))
+        return Path.quadCurvedPathWithPoints(points: chartData.normalisedPoints,
+                                             step: CGPoint(x: 1.0, y: 1.0),
+                                             globalOffset: chartData.globalMin/chartData.globalMax)
     }
     
+  var ptTargetAllZero: Bool {
+    return chartData.normalisedPointsTarget.allSatisfy({$0 == 0})
+  }
+  
 	/// The content and behavior of the `Line`.
 	/// Draw the background if showing the full line (?) and the `showBackground` option is set. Above that draw the line, and then the data indicator if the graph is currently being touched.
 	/// On appear, set the frame so that the data graph metrics can be calculated. On a drag (touch) gesture, highlight the closest touched data point.
@@ -26,24 +32,36 @@ public struct Line: View {
     public var body: some View {
         GeometryReader { geometry in
             ZStack {
-                if self.didCellAppear && self.showBackground {
+              if self.didCellAppear && self.showBackground && self.ptTargetAllZero {
                     LineBackgroundShapeView(chartData: chartData,
                                             geometry: geometry,
                                             style: style)
                 }
-                LineShapeView(chartData: chartData,
+                
+              LineShapeView(chartData: chartData,
                               geometry: geometry,
                               style: style,
                               trimTo: didCellAppear ? 1.0 : 0.0)
                     .animation(.easeIn)
+              
                 if self.showIndicator {
-                    IndicatorPoint()
-                        .position(self.getClosestPointOnPath(geometry: geometry,
-                                                             touchLocation: self.touchLocation))
-                        .rotationEffect(.degrees(180), anchor: .center)
-                        .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
+                  if self.ptTargetAllZero {
+                  IndicatorPoint()
+                    .position(self.getClosestPointOnPath(geometry: geometry, touchLocation: self.touchLocation))
+                    .rotationEffect(.degrees(180), anchor: .center)
+                    .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
+                  } else {
+                  IndicatorLine(geometry: geometry)
+                    .position(self.getClosestPointOnPathForCrosshair(geometry: geometry, touchLocation: self.touchLocation))
+                    .rotationEffect(.degrees(180), anchor: .center)
+                    .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
+
+                  }
                 }
+              
             }
+            .contentShape(Rectangle())
+
             .onAppear {
                 didCellAppear = true
             }
@@ -80,10 +98,24 @@ extension Line {
         let normalisedTouchLocationX = (touchLocation.x / geometryWidth) * CGFloat(chartData.normalisedPoints.count - 1)
         let closest = self.path.point(to: normalisedTouchLocationX)
         var denormClosest = closest.denormalize(with: geometry)
+      
         denormClosest.x = denormClosest.x / CGFloat(chartData.normalisedPoints.count - 1)
         denormClosest.y = denormClosest.y / CGFloat(chartData.normalisedRange)
         return denormClosest
     }
+  
+  private func getClosestPointOnPathForCrosshair(geometry: GeometryProxy, touchLocation: CGPoint) -> CGPoint {
+      let geometryWidth = geometry.frame(in: .local).width
+      let geometryHeight = geometry.frame(in: .local).height// - 5 // padding
+      let normalisedTouchLocationX = (touchLocation.x / geometryWidth) * CGFloat(chartData.normalisedPoints.count - 1)
+      let closest = self.path.point(to: normalisedTouchLocationX)
+      var denormClosest = closest.denormalize(with: geometry)
+    
+      denormClosest.x = denormClosest.x / CGFloat(chartData.normalisedPoints.count - 1)
+      denormClosest.y = geometryHeight
+      return denormClosest
+  }
+  
 
 //	/// Figure out where closest touch point was
 //	/// - Parameter point: location of data point on graph, near touch location
@@ -92,6 +124,9 @@ extension Line {
         let index = Int(round((touchLocation.x / geometryWidth) * CGFloat(chartData.points.count - 1)))
         if (index >= 0 && index < self.chartData.data.count){
             self.chartValue.currentValue = self.chartData.points[index]
+            self.chartValue.currentString = self.chartData.values[index]
+            self.chartValue.currentValueTarget = self.chartData.pointsTarget[index]
+          
         }
     }
 }
