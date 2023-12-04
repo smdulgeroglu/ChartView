@@ -75,7 +75,7 @@ public struct BarChartRow: View {
   /// - Parameter width: width of chart
   /// - Returns: value as `Double` if chart has data
     func getCurrentValue(width: CGFloat) -> (currentString: String?, currentValue: Double?, currentValueTarget:Double?) {
-    guard self.chartData.data.count > 0 else { return (nil, nil) }
+    guard self.chartData.data.count > 0 else { return (nil, nil, nil) }
     let index = max(0,min(self.chartData.data.count-1,Int(floor((self.touchLocation*width)/(width/CGFloat(self.chartData.data.count))))))
     
     return (self.chartData.values[index], self.chartData.points[index], self.chartData.pointsTarget[index])
