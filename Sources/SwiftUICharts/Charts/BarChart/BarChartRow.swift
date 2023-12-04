@@ -47,7 +47,7 @@ public struct BarChartRow: View {
                   self.chartValue.currentValue = currentValue
                   self.chartValue.currentValueTarget = currentValueTarget
                   self.chartValue.interactionInProgress = true
-                  self.chartValue.currentString = self.getCurrentValue(width: width).currentString
+                  self.chartValue.currentString = self.getCurrentValue(width: width).currentString ?? ""
                 }
               })
                 .onEnded({ value in
